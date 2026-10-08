@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fizjo-Punkt Katowice | Fizjoterapia i terapia manualna</title>
+<meta name="description" content="Gabinet fizjoterapii w centrum Katowic. Terapia manualna, masaż leczniczy, rehabilitacja. Wizyta zwykle w ciągu 2 dni roboczych.">
+<style>
+:root{
+  --tlo:#F7F5F1;
+  --karta:#FFFFFF;
+  --atrament:#13211F;
+  --szary:#5E6B68;
+  --zielen:#0E4F4A;
+  --zielen-ciemna:#0A3A36;
+  --zielen-jasna:#E6EFED;
+  --akcent:#B9542B;
+  --linia:#E2DED6;
+  --r:12px;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--tlo);color:var(--atrament);
+  font:17px/1.6 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+a{color:inherit}
+
+/* ---------- nagłówek ---------- */
+header{position:sticky;top:0;z-index:50;background:rgba(247,245,241,.93);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--linia)}
+.pasek{display:flex;align-items:center;gap:28px;height:68px}
+.marka{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;
+  letter-spacing:-.02em;text-decoration:none;flex:none}
+.marka svg{width:30px;height:30px;flex:none}
+nav{display:flex;gap:24px;font-size:15px;margin-left:8px}
+nav a{text-decoration:none;color:var(--szary)}
+nav a:hover{color:var(--atrament)}
+.naglowek-akcje{margin-left:auto;display:flex;align-items:center;gap:16px;flex:none}
+.tel-gora{font-weight:650;text-decoration:none;white-space:nowrap}
+.tel-gora small{display:block;font-weight:400;font-size:12px;color:var(--szary)}
+.btn{display:inline-block;background:var(--zielen);color:#fff;text-decoration:none;
+  padding:12px 20px;border-radius:8px;font-weight:600;font-size:15px;border:0;cursor:pointer;
+  transition:background .15s;white-space:nowrap}
+.btn:hover{background:var(--zielen-ciemna)}
+.btn-obrys{background:transparent;color:var(--zielen);border:1.5px solid var(--zielen)}
+.btn-obrys:hover{background:var(--zielen-jasna)}
+
+/* ---------- hero ---------- */
+.hero{padding:72px 0 56px;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.hero h1{font-size:46px;line-height:1.08;letter-spacing:-.03em;font-weight:700;max-width:14ch}
+.hero .lid{margin-top:18px;font-size:19px;color:var(--szary);max-width:46ch}
+.hero-akcje{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.zaufanie{display:flex;gap:28px;margin-top:34px;padding-top:24px;border-top:1px solid var(--linia);
+  flex-wrap:wrap}
+.zaufanie div{font-size:14px;color:var(--szary);line-height:1.4}
+.zaufanie b{display:block;font-size:22px;color:var(--atrament);font-weight:700;letter-spacing:-.02em}
+
+.hero-wiz{background:var(--zielen);border-radius:var(--r);padding:34px;color:#fff;
+  position:relative;overflow:hidden}
+.hero-wiz h2{font-size:15px;letter-spacing:.1em;text-transform:uppercase;
+  color:#9EC4BE;font-weight:600;margin-bottom:18px}
+.termin{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.termin b{font-size:38px;letter-spacing:-.03em;font-weight:700}
+.hero-wiz p{color:#C9DCD9;font-size:15px;line-height:1.5}
+.hero-wiz ul{list-style:none;padding:0;margin:22px 0 0;border-top:1px solid rgba(255,255,255,.16);
+  padding-top:18px}
+.hero-wiz li{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#DCEAE8;
+  margin-bottom:10px}
+.hero-wiz li svg{width:18px;height:18px;flex:none;margin-top:3px;stroke:#7FB8B0}
+
+/* ---------- sekcje ---------- */
+section{padding:60px 0}
+.tyt{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--akcent);
+  font-weight:700;margin-bottom:12px}
+h2.sek{font-size:33px;letter-spacing:-.025em;font-weight:700;line-height:1.15;max-width:20ch}
+.pod{color:var(--szary);margin-top:12px;max-width:52ch}
+
+.karty{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.karta{background:var(--karta);border:1px solid var(--linia);border-radius:var(--r);padding:26px 24px}
+.karta svg{width:34px;height:34px;stroke:var(--zielen);fill:none;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round;margin-bottom:16px}
+.karta h3{font-size:18px;font-weight:650;margin-bottom:8px;letter-spacing:-.01em}
+.karta p{font-size:15px;color:var(--szary);line-height:1.55}
+
+/* ---------- cennik ---------- */
+.cennik{background:var(--karta);border:1px solid var(--linia);border-radius:var(--r);
+  overflow:hidden;margin-top:34px}
+.cwiersz{display:grid;grid-template-columns:1fr auto auto;gap:20px;align-items:center;
+  padding:16px 26px;border-bottom:1px solid var(--linia)}
+.cwiersz:last-child{border-bottom:0}
+.cwiersz:nth-child(odd){background:#FCFBF9}
+.cnazwa{font-weight:600;font-size:16px}
+.cnazwa small{display:block;font-weight:400;font-size:14px;color:var(--szary);margin-top:2px}
+.cczas{color:var(--szary);font-size:14px;white-space:nowrap}
+.ccena{font-weight:700;font-size:18px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cnota{margin-top:16px;font-size:14px;color:var(--szary)}
+
+/* ---------- kontakt ---------- */
+.kontakt{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:34px}
+.kblok{background:var(--karta);border:1px solid var(--linia);border-radius:var(--r);padding:26px}
+.kblok h3{font-size:17px;font-weight:650;margin-bottom:14px}
+.godziny{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:15px}
+.godziny span:nth-child(odd){color:var(--szary)}
+.godziny span:nth-child(even){text-align:right;font-variant-numeric:tabular-nums}
+.kblok a.duzy{font-size:24px;font-weight:700;text-decoration:none;display:block;margin-bottom:4px;
+  letter-spacing:-.02em}
+.kblok p{font-size:15px;color:var(--szary);line-height:1.55}
+
+footer{border-top:1px solid var(--linia);padding:28px 0 100px;font-size:14px;color:var(--szary)}
+.fwrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* ---------- pasek mobilny ---------- */
+.mobilny{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;gap:10px;padding:10px 16px;
+  background:rgba(247,245,241,.96);backdrop-filter:blur(8px);border-top:1px solid var(--linia)}
+.mobilny a{flex:1;text-align:center}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:34px;padding:44px 0 36px}
+  .hero h1{font-size:34px;max-width:none}
+  .karty{grid-template-columns:1fr}
+  .kontakt{grid-template-columns:1fr}
+  nav{display:none}
+  .naglowek-akcje .btn{display:none}
+  .mobilny{display:flex}
+  h2.sek{font-size:26px}
+  section{padding:44px 0}
+  .cwiersz{grid-template-columns:1fr auto;gap:8px 16px}
+  .cczas{grid-column:1;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap pasek">
+    <a class="marka" href="#">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" fill="#0E4F4A"/>
+        <g fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round">
+          <path d="M16 8.5v15"/>
+          <path d="M12.5 11.5h7"/>
+          <path d="M11.5 16h9"/>
+          <path d="M12.5 20.5h7"/>
+        </g>
+      </svg>
+      Fizjo-Punkt
+    </a>
+    <nav>
+      <a href="#pomoc">Zakres pomocy</a>
+      <a href="#cennik">Cennik</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <div class="naglowek-akcje">
+      <a class="tel-gora" href="tel:+48601234567">601 234 567<small>pon.–pt. od 8:00</small></a>
+      <a class="btn" href="#kontakt">Umów wizytę</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div>
+      <h1>Ból pleców nie musi być twoim stałym tłem.</h1>
+      <p class="lid">Gabinet fizjoterapii w centrum Katowic. Zaczynamy od badania,
+         a nie od zabiegu, żeby trafić w przyczynę, a nie w objaw.</p>
+      <div class="hero-akcje">
+        <a class="btn" href="#kontakt">Umów wizytę</a>
+        <a class="btn btn-obrys" href="tel:+48601234567">Zadzwoń: 601 234 567</a>
+      </div>
+      <div class="zaufanie">
+        <div><b>od 2004</b>w Katowicach</div>
+        <div><b>45 min</b>trwa konsultacja</div>
+        <div><b>parking</b>bezpłatny przed budynkiem</div>
+      </div>
+    </div>
+
+    <div class="hero-wiz">
+      <h2>Najbliższy wolny termin</h2>
+      <div class="termin"><b>czwartek</b></div>
+      <p>Zwykle przyjmujemy w ciągu 2 dni roboczych od zgłoszenia.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Pierwsza wizyta zawsze z badaniem</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Plan terapii na piśmie po konsultacji</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Odwołanie bez opłaty do 24 godzin przed</li>
+      </ul>
+    </div>
+  </div>
+
+  <section id="pomoc">
+    <div class="tyt">Zakres pomocy</div>
+    <h2 class="sek">Z czym najczęściej przychodzą pacjenci</h2>
+    <p class="pod">Jeśli nie widzisz tutaj swojego problemu, zadzwoń. Powiemy wprost,
+       czy możemy pomóc, czy lepiej skierować cię gdzie indziej.</p>
+
+    <div class="karty">
+      <div class="karta">
+        <svg viewBox="0 0 32 32"><path d="M16 4v24"/><path d="M12 8h8"/><path d="M11 15h10"/><path d="M12 22h8"/><circle cx="16" cy="4.5" r="1.6"/></svg>
+        <h3>Ból kręgosłupa</h3>
+        <p>Odcinek szyjny, piersiowy i lędźwiowy. Terapia manualna połączona z ćwiczeniami,
+           które wykonujesz potem sam w domu.</p>
+      </div>
+      <div class="karta">
+        <svg viewBox="0 0 32 32"><path d="M8 26c0-5 3.6-9 8-9s8 4 8 9"/><circle cx="16" cy="11" r="5.5"/><path d="M4 26h24"/></svg>
+        <h3>Po urazie i operacji</h3>
+        <p>Powrót do sprawności po skręceniach, złamaniach i zabiegach ortopedycznych,
+           w tempie dobranym do etapu gojenia.</p>
+      </div>
+      <div class="karta">
+        <svg viewBox="0 0 32 32"><rect x="5" y="9" width="22" height="16" rx="3"/><path d="M11 9V6a5 5 0 0 1 10 0v3"/><path d="M16 15v4"/></svg>
+        <h3>Praca przy biurku</h3>
+        <p>Napięcie karku, barków i nadgarstków. Pokazujemy też, jak ustawić stanowisko,
+           żeby problem nie wracał.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="cennik">
+    <div class="tyt">Cennik</div>
+    <h2 class="sek">Pełne ceny, bez gwiazdek</h2>
+    <p class="pod">Ceny brutto. Nie doliczamy opłat za pierwszą wizytę ani za plan terapii.</p>
+
+    <div class="cennik">
+      <div class="cwiersz">
+        <div class="cnazwa">Konsultacja fizjoterapeutyczna<small>Badanie, diagnoza i plan terapii</small></div>
+        <div class="cczas">45 min</div><div class="ccena">120 zł</div>
+      </div>
+      <div class="cwiersz">
+        <div class="cnazwa">Terapia manualna kręgosłupa<small>Praca na stawach i tkankach miękkich</small></div>
+        <div class="cczas">50 min</div><div class="ccena">150 zł</div>
+      </div>
+      <div class="cwiersz">
+        <div class="cnazwa">Masaż leczniczy całego ciała</div>
+        <div class="cczas">60 min</div><div class="ccena">140 zł</div>
+      </div>
+      <div class="cwiersz">
+        <div class="cnazwa">Masaż leczniczy odcinkowy<small>Wybrana partia ciała</small></div>
+        <div class="cczas">30 min</div><div class="ccena">80 zł</div>
+      </div>
+      <div class="cwiersz">
+        <div class="cnazwa">Kinezyterapia indywidualna<small>Ćwiczenia pod okiem terapeuty</small></div>
+        <div class="cczas">45 min</div><div class="ccena">110 zł</div>
+      </div>
+      <div class="cwiersz">
+        <div class="cnazwa">Fizykoterapia<small>Zabieg pojedynczy</small></div>
+        <div class="cczas">15 min</div><div class="ccena">35 zł</div>
+      </div>
+      <div class="cwiersz">
+        <div class="cnazwa">Kinesiotaping<small>Jedna aplikacja</small></div>
+        <div class="cczas">20 min</div><div class="ccena">60 zł</div>
+      </div>
+    </div>
+    <p class="cnota">Nie wiesz, co wybrać? Umów konsultację. Dobierzemy resztę na miejscu.</p>
+  </section>
+
+  <section id="kontakt">
+    <div class="tyt">Kontakt</div>
+    <h2 class="sek">Umów wizytę</h2>
+    <p class="pod">Najszybciej telefonicznie. Jeśli nie odbieramy, jesteśmy przy pacjencie,
+       więc oddzwonimy tego samego dnia.</p>
+
+    <div class="kontakt">
+      <div class="kblok">
+        <h3>Zadzwoń lub napisz</h3>
+        <a class="duzy" href="tel:+48601234567">601 234 567</a>
+        <a href="mailto:biuro@fizjopunkt.pl">biuro@fizjopunkt.pl</a>
+        <p style="margin-top:16px">ul. Przykładowa 12/4<br>40-001 Katowice<br>
+           Przystanek tramwajowy i autobusowy 50 m od wejścia.<br>
+           Bezpłatny parking przed budynkiem.</p>
+        <a class="btn" style="margin-top:18px" href="tel:+48601234567">Zadzwoń teraz</a>
+      </div>
+      <div class="kblok">
+        <h3>Godziny przyjęć</h3>
+        <div class="godziny">
+          <span>Poniedziałek</span><span>8:00–18:00</span>
+          <span>Wtorek</span><span>8:00–18:00</span>
+          <span>Środa</span><span>8:00–16:00</span>
+          <span>Czwartek</span><span>8:00–18:00</span>
+          <span>Piątek</span><span>8:00–15:00</span>
+          <span>Sobota</span><span>po uzgodnieniu</span>
+          <span>Niedziela</span><span>nieczynne</span>
+        </div>
+        <p style="margin-top:16px">Wizyty umawiamy co 45 lub 60 minut, więc nie czekasz
+           w poczekalni dłużej niż kilka minut.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap fwrap">
+    <span>Fizjo-Punkt, gabinet fizjoterapii w Katowicach. Działa od 2004 roku.</span>
+    <span>601 234 567 · biuro@fizjopunkt.pl</span>
+  </div>
+</footer>
+
+<div class="mobilny">
+  <a class="btn btn-obrys" href="tel:+48601234567">Zadzwoń</a>
+  <a class="btn" href="#kontakt">Umów wizytę</a>
+</div>
+
+</body>
+</html>
