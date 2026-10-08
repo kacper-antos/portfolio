@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portfolio: strony, grafika, animacje</title>
+<meta name="description" content="Projekty stron internetowych, grafiki i konfiguratorów produktowych.">
+<style>
+:root{
+  --bg:#F5F2EC; --surface:#FFFFFF; --ink:#1B1B1F; --muted:#6B6A70;
+  --accent:#E8590C; --line:#DED8CD;
+}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);
+  font:16px/1.6 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:900px;margin:0 auto;padding:0 24px}
+
+/* ---------- nagłówek ---------- */
+header{padding:76px 0 54px}
+.tag{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);
+     font-weight:600;display:flex;align-items:center;gap:13px;margin-bottom:20px}
+.tag::before{content:"";width:30px;height:2px;background:var(--accent)}
+h1{font-size:44px;line-height:1.1;letter-spacing:-.025em;font-weight:700;max-width:16ch}
+h1 em{font-style:normal;color:var(--accent)}
+.lede{margin-top:20px;font-size:18px;color:var(--muted);max-width:56ch}
+.facts{display:flex;gap:30px;flex-wrap:wrap;margin-top:30px;font-size:14.5px}
+.fact b{display:block;font-size:15px;font-weight:650}
+.fact span{color:var(--muted)}
+
+/* ---------- prace ---------- */
+h2.sec{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+       font-weight:650;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:30px}
+
+.work{display:block;text-decoration:none;color:inherit;background:var(--surface);
+      border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:22px;
+      transition:border-color .16s,transform .16s}
+.work:hover{border-color:#C4BCAC;transform:translateY(-2px)}
+.work-vis{height:168px;display:flex;align-items:center;justify-content:center;
+          border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.work-body{padding:20px 24px 22px}
+.work h3{font-size:19px;font-weight:650;letter-spacing:-.01em}
+.work p{color:var(--muted);font-size:14.5px;margin-top:6px}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}
+.chip{font-size:12px;border:1px solid var(--line);border-radius:20px;padding:3px 11px;
+      color:var(--muted)}
+.more{display:inline-block;margin-top:14px;font-size:14px;font-weight:600;color:var(--accent)}
+.more::after{content:" →"}
+
+/* miniatury rysowane w CSS/SVG, bez zdjęć */
+.vis-konf{background:#FAF8F4}
+.vis-ig{background:#F1E9DF;display:flex;gap:16px}
+.vis-ig i{width:62px;height:62px;border-radius:50%;display:block}
+.vis-ban{background:#EFEBE3;padding:0 26px;width:100%}
+.vis-ban .bar{height:9px;border-radius:5px;background:#D9D2C6}
+
+.note{background:#FBF5EF;border:1px solid #F0DFCE;border-radius:10px;padding:16px 20px;
+      font-size:14px;color:#6A5847;margin:34px 0 10px}
+
+footer{margin-top:56px;padding:28px 0 70px;border-top:1px solid var(--line);
+       font-size:14px;color:var(--muted);display:flex;justify-content:space-between;
+       flex-wrap:wrap;gap:12px}
+footer a{color:var(--ink)}
+
+@media(max-width:620px){
+  header{padding:48px 0 36px}
+  h1{font-size:32px}
+  .lede{font-size:16px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="tag">Freelancer</div>
+  <h1>Strony, grafika i animacje. <em>Szybko i starannie.</em></h1>
+  <p class="lede">Projektuję i koduję od zera: od strony firmowej, przez konfigurator
+     produktu, po komplet grafik na social media.</p>
+  <div class="facts">
+    <div class="fact"><b>1–2 dni</b><span>pierwszy szkic</span></div>
+    <div class="fact"><b>W cenie</b><span>poprawki po oddaniu</span></div>
+    <div class="fact"><b>Bez szablonów</b><span>każdy projekt od zera</span></div>
+  </div>
+</header>
+
+<h2 class="sec">Wybrane prace</h2>
+
+<a class="work" href="konfigurator/index.html">
+  <div class="work-vis vis-konf">
+    <svg viewBox="0 0 260 110" width="300" aria-hidden="true">
+      <ellipse cx="130" cy="97" rx="78" ry="4" fill="#000" opacity=".06"/>
+      <rect x="52" y="30" width="156" height="10" rx="2" fill="#C2854A"/>
+      <rect x="52" y="38" width="156" height="3" rx="1.5" fill="#9A683A"/>
+      <rect x="62" y="40" width="6" height="52" rx="1" fill="#8A8477"/>
+      <rect x="192" y="40" width="6" height="52" rx="1" fill="#8A8477"/>
+      <g fill="none" stroke="#C8C2B4" stroke-width="1">
+        <line x1="52" y1="104" x2="208" y2="104"/>
+        <line x1="52" y1="100" x2="52" y2="108"/>
+        <line x1="208" y1="100" x2="208" y2="108"/>
+      </g>
+      <text x="130" y="102" text-anchor="middle" font-size="7" font-family="monospace"
+            fill="#9A9385">160 cm</text>
+    </svg>
+  </div>
+  <div class="work-body">
+    <h3>Konfigurator produktu na stronę</h3>
+    <p>Klient składa produkt z parametrów, a cena przelicza się na żywo. Konfigurację
+       można wysłać linkiem. Ceny zmienia właściciel strony, bez udziału programisty.</p>
+    <div class="chips"><span class="chip">JavaScript</span><span class="chip">Bez bibliotek</span>
+      <span class="chip">Mobile</span><span class="chip">SVG</span></div>
+    <span class="more">Otwórz działające demo</span>
+  </div>
+</a>
+
+<a class="work" href="ig-okladki/okladki.html">
+  <div class="work-vis vis-ig" id="ig-vis"></div>
+  <div class="work-body">
+    <h3>Okładki wyróżnionych relacji na Instagram</h3>
+    <p>Zestaw ośmiu ikon w jednym stylu. Rysunek wektorowy, więc ostry na każdym
+       ekranie i łatwy do przekolorowania pod nową identyfikację.</p>
+    <div class="chips"><span class="chip">SVG</span><span class="chip">1080 × 1080</span>
+      <span class="chip">Komplet 8 szt.</span></div>
+    <span class="more">Zobacz zestaw</span>
+  </div>
+</a>
+
+<div class="note">
+  Projekty oznaczone jako koncepcyjne powstały jako próbki warsztatu i nie są
+  realizacjami dla klientów. Marki w nich użyte są fikcyjne.
+</div>
+
+<footer>
+  <span>Dostępny od zaraz · odpisuję w ciągu kilku godzin</span>
+  <span><a href="https://nelessa.com">nelessa.com</a> – strona, którą zbudowałem</span>
+</footer>
+
+</div>
+
+<script>
+/* miniatura okładek: te same kolory co w projekcie */
+const para = [['#473A32','#EFE6DA'],['#E6DACB','#473A32'],['#473A32','#EFE6DA'],['#E6DACB','#473A32']];
+const ikony = [
+  `<path d="M41 7H27.6a3 3 0 0 0-2.1.9L7.9 25.5a3 3 0 0 0 0 4.2l12.4 12.4a3 3 0 0 0 4.2 0l17.6-17.6a3 3 0 0 0 .9-2.1V7z"/><circle cx="33.6" cy="14.4" r="2.6"/>`,
+  `<rect x="19.5" y="4.5" width="9" height="9.5" rx="1.6"/><path d="M22.4 14v3.4"/><path d="M25.6 14v3.4"/><rect x="15.5" y="17.4" width="17" height="26" rx="4.5"/><path d="M15.5 27.5h17"/>`,
+  `<circle cx="24" cy="24" r="15.5"/><path d="M24 8.5a15.5 15.5 0 0 1 0 31z" fill="currentColor" stroke="none"/>`,
+  `<path d="M24 6.5l5.4 10.9 12.1 1.8-8.8 8.5 2.1 12-10.8-5.7-10.8 5.7 2.1-12-8.8-8.5 12.1-1.8z"/>`
+];
+document.getElementById('ig-vis').innerHTML = ikony.map((ik,i) => {
+  const [tlo,linia] = para[i];
+  return `<svg viewBox="0 0 48 48" width="62" height="62" style="border-radius:50%">
+    <rect width="48" height="48" fill="${tlo}"/>
+    <g transform="translate(24 24) scale(.62) translate(-24 -24)" fill="none"
+       stroke="${linia}" stroke-width="2.3" stroke-linecap="round"
+       stroke-linejoin="round" color="${linia}">${ik}</g></svg>`;
+}).join('');
+</script>
+</body>
+</html>
