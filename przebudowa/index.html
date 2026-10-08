@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Przebudowa strony gabinetu fizjoterapii</title>
+<meta name="description" content="Studium przebudowy strony firmowej: wersja przed, wersja po i uzasadnienie każdej decyzji.">
+<style>
+:root{
+  --bg:#F5F2EC; --karta:#FFFFFF; --ink:#1B1B1F; --muted:#6B6A70;
+  --accent:#E8590C; --linia:#DED8CD; --zielen:#0E4F4A;
+}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);
+  font:16px/1.6 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+a{color:inherit}
+
+header{padding:64px 0 36px}
+.tag{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);
+  font-weight:600;display:flex;align-items:center;gap:13px;margin-bottom:18px}
+.tag::before{content:"";width:30px;height:2px;background:var(--accent)}
+h1{font-size:40px;line-height:1.12;letter-spacing:-.025em;font-weight:700;max-width:18ch}
+.lede{margin-top:18px;font-size:18px;color:var(--muted);max-width:60ch}
+.powrot{display:inline-block;margin-top:22px;font-size:14px;color:var(--muted)}
+
+/* ---------- przełącznik ---------- */
+.panel{background:var(--karta);border:1px solid var(--linia);border-radius:12px;overflow:hidden;
+  margin-bottom:14px}
+.sterowanie{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--linia);
+  flex-wrap:wrap}
+.przelacznik{display:flex;background:#EFEAE1;border-radius:8px;padding:3px}
+.przelacznik button{border:0;background:transparent;font:inherit;font-size:14px;font-weight:600;
+  padding:8px 18px;border-radius:6px;cursor:pointer;color:var(--muted)}
+.przelacznik button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.09)}
+.przelacznik button.on.po{color:var(--zielen)}
+.urzadzenia{display:flex;gap:4px;margin-left:auto}
+.urzadzenia button{border:1px solid var(--linia);background:#fff;font:inherit;font-size:13px;
+  padding:7px 13px;border-radius:7px;cursor:pointer;color:var(--muted)}
+.urzadzenia button.on{border-color:var(--ink);color:var(--ink);font-weight:600}
+.otworz{font-size:13.5px;color:var(--accent);text-decoration:none;font-weight:600;white-space:nowrap}
+
+.scena{background:#E9E4DA;padding:18px;display:flex;justify-content:center;min-height:520px}
+.ramka{background:#fff;border:1px solid #CFC7B9;border-radius:8px;overflow:hidden;
+  width:100%;max-width:100%;transition:max-width .25s}
+.ramka.telefon{max-width:390px;border-radius:18px}
+.ramka iframe{display:block;width:100%;height:560px;border:0}
+.metka{font-size:13px;color:var(--muted);padding:10px 16px;border-top:1px solid var(--linia);
+  background:#FBF9F6}
+.metka b{color:var(--ink)}
+
+/* ---------- zmiany ---------- */
+h2{font-size:26px;letter-spacing:-.02em;font-weight:700;margin:52px 0 6px}
+h2 + p{color:var(--muted);max-width:58ch;margin-bottom:26px}
+
+.zmiana{background:var(--karta);border:1px solid var(--linia);border-radius:12px;padding:22px 24px;
+  margin-bottom:14px}
+.zmiana h3{font-size:18px;font-weight:650;letter-spacing:-.01em;margin-bottom:14px;
+  display:flex;gap:11px;align-items:baseline}
+.nr{font-size:12px;font-weight:700;color:var(--accent);background:#FBEADF;border-radius:4px;
+  padding:3px 7px;line-height:1;flex:none}
+.para{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.przed-box,.po-box{border-radius:8px;padding:13px 15px;font-size:14.5px;line-height:1.5}
+.przed-box{background:#FAF3F2;border:1px solid #EBD6D2}
+.po-box{background:#EFF4F3;border:1px solid #CFE0DD}
+.przed-box em,.po-box em{display:block;font-style:normal;font-size:11.5px;letter-spacing:.1em;
+  text-transform:uppercase;font-weight:700;margin-bottom:5px}
+.przed-box em{color:#A8453A}
+.po-box em{color:var(--zielen)}
+.czemu{font-size:15px;color:#4A4139;border-left:3px solid var(--accent);padding-left:13px}
+.czemu b{font-weight:650}
+
+.usuniete{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.usuniete span{font-size:13.5px;background:#FAF3F2;border:1px solid #EBD6D2;color:#8B4A42;
+  border-radius:20px;padding:5px 13px;text-decoration:line-through}
+
+.nota{background:#FBF5EF;border:1px solid #F0DFCE;border-radius:10px;padding:16px 20px;
+  font-size:14px;color:#6A5847;margin:40px 0 0}
+
+footer{margin-top:44px;padding:26px 0 70px;border-top:1px solid var(--linia);
+  font-size:14px;color:var(--muted)}
+
+@media(max-width:760px){
+  header{padding:42px 0 28px}
+  h1{font-size:29px}
+  .lede{font-size:16px}
+  .para{grid-template-columns:1fr}
+  .urzadzenia{margin-left:0;width:100%}
+  .scena{padding:10px;min-height:0}
+  .ramka iframe{height:460px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="tag">Projekt koncepcyjny</div>
+  <h1>Przebudowa strony gabinetu fizjoterapii</h1>
+  <p class="lede">Ta sama firma, te same ceny, godziny i dane kontaktowe.
+     Zmieniłem wyłącznie sposób, w jaki strona rozmawia z pacjentem.
+     Poniżej obie wersje działają na żywo, więc można je kliknąć i porównać.</p>
+  <a class="powrot" href="../index.html">&larr; Wróć do portfolio</a>
+</header>
+
+<div class="panel">
+  <div class="sterowanie">
+    <div class="przelacznik">
+      <button id="b-przed" class="on" onclick="pokaz('przed')">Przed</button>
+      <button id="b-po" onclick="pokaz('po')">Po przebudowie</button>
+    </div>
+    <div class="urzadzenia">
+      <button id="u-desktop" class="on" onclick="urzadzenie('desktop')">Komputer</button>
+      <button id="u-telefon" onclick="urzadzenie('telefon')">Telefon</button>
+    </div>
+    <a class="otworz" id="link-otworz" href="przed.html" target="_blank">Otwórz w nowej karcie &rarr;</a>
+  </div>
+  <div class="scena">
+    <div class="ramka" id="ramka">
+      <iframe id="podglad" src="przed.html" title="Podgląd strony"></iframe>
+    </div>
+  </div>
+  <div class="metka" id="metka">
+    <b>Wersja przed:</b> stała szerokość 960 px, brak wersji mobilnej.
+    Na telefonie użytkownik ogląda pomniejszoną stronę dla komputera.
+  </div>
+</div>
+
+<h2>Co zmieniłem i dlaczego</h2>
+<p>Każda decyzja ma uzasadnienie. Przebudowa, której nie da się wytłumaczyć,
+   jest tylko zmianą gustu.</p>
+
+<div class="zmiana">
+  <h3><span class="nr">01</span> Nagłówek mówi o pacjencie, nie o firmie</h3>
+  <div class="para">
+    <div class="przed-box"><em>Przed</em>„Witamy serdecznie na oficjalnej stronie internetowej Gabinetu FIZJO-PUNKT!”</div>
+    <div class="po-box"><em>Po</em>„Ból pleców nie musi być twoim stałym tłem.”</div>
+  </div>
+  <p class="czemu">Pierwszy ekran ma odpowiedzieć na jedno pytanie, które ma w głowie wchodzący:
+     <b>czy to miejsce rozwiąże mój problem</b>. Powitanie nie odpowiada na nic.</p>
+</div>
+
+<div class="zmiana">
+  <h3><span class="nr">02</span> Jedno wyraźne działanie zamiast ukrytego kontaktu</h3>
+  <div class="para">
+    <div class="przed-box"><em>Przed</em>Telefon drobnym drukiem w rogu. Na dole prośba o maila
+      z adnotacją: „postaramy się odpowiedzieć w ciągu 48 godzin”.</div>
+    <div class="po-box"><em>Po</em>Przycisk „Umów wizytę” w nagłówku, duży numer w treści
+      i stały pasek z telefonem na dole ekranu telefonu.</div>
+  </div>
+  <p class="czemu">Pacjent, który ma ból, nie pisze maila i nie czeka dwóch dni.
+     <b>Dzwoni do pierwszego gabinetu, w którym numer rzuca się w oczy.</b></p>
+</div>
+
+<div class="zmiana">
+  <h3><span class="nr">03</span> Strona działa na telefonie</h3>
+  <div class="para">
+    <div class="przed-box"><em>Przed</em>Sztywne 960 px i brak znacznika viewport.
+      Telefon pokazuje pomniejszoną stronę dla komputera.</div>
+    <div class="po-box"><em>Po</em>Układ działa od 360 px w górę, przyciski wielkości kciuka,
+      telefon klikalny jednym dotknięciem.</div>
+  </div>
+  <p class="czemu">Lokalne zapytania typu „fizjoterapeuta Katowice” to w większości telefony,
+     często w drodze. <b>Strona, na której trzeba powiększać palcami, odpada w kilka sekund.</b>
+     Przełącz podgląd wyżej na „Telefon”, żeby zobaczyć różnicę.</p>
+</div>
+
+<div class="zmiana">
+  <h3><span class="nr">04</span> Trzy akapity ogólników zamienione na konkret</h3>
+  <div class="para">
+    <div class="przed-box"><em>Przed</em>„Kompleksowa, profesjonalna oraz indywidualnie dobrana opieka
+      dla każdego Pacjenta, bez względu na wiek oraz rodzaj dolegliwości.”</div>
+    <div class="po-box"><em>Po</em>Trzy nazwane sytuacje: ból kręgosłupa, powrót po urazie
+      i operacji, dolegliwości od pracy przy biurku.</div>
+  </div>
+  <p class="czemu">Zdanie, pod którym podpisałby się każdy gabinet w Polsce, nie wyróżnia żadnego.
+     <b>Człowiek szuka siebie w opisie</b>, a nie listy przymiotników.</p>
+</div>
+
+<div class="zmiana">
+  <h3><span class="nr">05</span> Nawigacja z dziewięciu pozycji do trzech</h3>
+  <div class="para">
+    <div class="przed-box"><em>Przed</em>Strona główna, O firmie, Oferta, Cennik, Galeria,
+      Aktualności, Linki, Księga gości, Kontakt. Do tego to samo menu powtórzone w kolumnie obok.</div>
+    <div class="po-box"><em>Po</em>Zakres pomocy, Cennik, Kontakt. Plus przycisk umówienia wizyty.</div>
+  </div>
+  <p class="czemu">Każda dodatkowa pozycja to decyzja, którą przerzucamy na odwiedzającego.
+     <b>Zostawiłem tylko to, czego ktoś naprawdę szuka</b> przed umówieniem wizyty.</p>
+</div>
+
+<div class="zmiana">
+  <h3><span class="nr">06</span> Obietnice sprawdzalne zamiast superlatywów</h3>
+  <div class="para">
+    <div class="przed-box"><em>Przed</em>„NAJLEPSZE CENY!!!” na żółtej plakietce
+      i „ZAPRASZAMY DO ZAPOZNANIA SIĘ Z NASZĄ OFERTĄ!!!” czerwonym drukiem.</div>
+    <div class="po-box"><em>Po</em>„Zwykle przyjmujemy w ciągu 2 dni roboczych”,
+      „plan terapii na piśmie”, „odwołanie bez opłaty do 24 godzin przed”.</div>
+  </div>
+  <p class="czemu">Superlatyw niczego nie dowodzi i w ochronie zdrowia wręcz odstrasza.
+     <b>Konkret, który można sprawdzić, buduje zaufanie</b>, bo firma bierze na siebie zobowiązanie.</p>
+</div>
+
+<div class="zmiana">
+  <h3><span class="nr">07</span> Usunięte elementy, które szkodziły wiarygodności</h3>
+  <div class="usuniete">
+    <span>licznik odwiedzin</span>
+    <span>aktualności z 2013 roku</span>
+    <span>księga gości</span>
+    <span>„najlepiej widoczna w IE8”</span>
+    <span>strona z linkami</span>
+    <span>pusta galeria</span>
+  </div>
+  <p class="czemu" style="margin-top:14px">Najgroźniejsze są nieaktualne aktualności.
+     Wpis sprzed ponad dekady mówi odwiedzającemu jedno: <b>ta firma może już nie istnieć</b>.
+     Lepiej nie mieć działu aktualności niż mieć martwy.</p>
+</div>
+
+<div class="zmiana">
+  <h3><span class="nr">08</span> Cennik wyjaśnia, co wchodzi w cenę</h3>
+  <div class="para">
+    <div class="przed-box"><em>Przed</em>Tabela z nazwą, czasem i kwotą. Bez informacji,
+      co obejmuje zabieg i od czego zacząć.</div>
+    <div class="po-box"><em>Po</em>Te same ceny, ale z opisem zakresu, adnotacją o braku
+      dopłat i podpowiedzią dla niezdecydowanych.</div>
+  </div>
+  <p class="czemu">Ceny zostawiłem identyczne, co do złotówki. <b>Przebudowa nie polega
+     na podniesieniu cennika</b>, tylko na usunięciu wątpliwości, które wstrzymują telefon.</p>
+</div>
+
+<div class="nota">
+  Projekt koncepcyjny. Gabinet „Fizjo-Punkt” jest fikcyjny, a wersja „przed” to przygotowana
+  przeze mnie rekonstrukcja typowej strony firmowej z okolic 2012 roku, a nie strona istniejącego
+  klienta. Obie wersje napisałem od zera w HTML i CSS, bez gotowych szablonów i bibliotek.
+</div>
+
+<footer>
+  Napisz, jeśli chcesz zobaczyć taki rozbiór swojej obecnej strony.
+</footer>
+
+</div>
+
+<script>
+const opisy = {
+  przed:'<b>Wersja przed:</b> stała szerokość 960 px, brak wersji mobilnej. Na telefonie użytkownik ogląda pomniejszoną stronę dla komputera.',
+  po:'<b>Wersja po przebudowie:</b> układ działa od 360 px, telefon i przycisk umówienia wizyty dostępne z każdego miejsca strony.'
+};
+
+function pokaz(co){
+  document.getElementById('podglad').src = co + '.html';
+  document.getElementById('link-otworz').href = co + '.html';
+  document.getElementById('b-przed').className = co==='przed' ? 'on' : '';
+  document.getElementById('b-po').className = co==='po' ? 'on po' : '';
+  document.getElementById('metka').innerHTML = opisy[co];
+}
+
+function urzadzenie(co){
+  document.getElementById('ramka').className = co==='telefon' ? 'ramka telefon' : 'ramka';
+  document.getElementById('u-desktop').className = co==='desktop' ? 'on' : '';
+  document.getElementById('u-telefon').className = co==='telefon' ? 'on' : '';
+}
+</script>
+</body>
+</html>
