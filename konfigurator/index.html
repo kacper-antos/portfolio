@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Konfigurator biurka na wymiar (demo)</title>
+<style>
+/* ---------------------------------------------------------------
+   Konfigurator produktu (demo)
+   Wszystkie parametry i ceny siedzą w obiekcie CONFIG w <script>.
+   Zmiana ceny = zmiana jednej liczby. Bez dotykania reszty kodu.
+---------------------------------------------------------------- */
+:root{
+  --bg:#FAF8F4;
+  --surface:#FFFFFF;
+  --ink:#16161A;
+  --muted:#6E6B66;
+  --line:#E3DED4;
+  --accent:#B4531F;
+  --accent-soft:#FBF0E8;
+  --radius:10px;
+}
+*{box-sizing:border-box;margin:0}
+body{
+  background:var(--bg);color:var(--ink);
+  font:16px/1.55 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  padding:40px 20px 80px;
+}
+.shell{max-width:1060px;margin:0 auto}
+
+.eyebrow{
+  font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:600;margin-bottom:10px
+}
+h1{font-size:30px;line-height:1.2;letter-spacing:-.02em;font-weight:650}
+.lede{color:var(--muted);margin-top:8px;max-width:52ch}
+
+.grid{display:grid;grid-template-columns:1fr 340px;gap:28px;margin-top:34px;align-items:start}
+
+/* ---- panel wyboru ---- */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px}
+.step + .step{margin-top:30px;padding-top:30px;border-top:1px solid var(--line)}
+.step-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.step-no{
+  font-size:11px;font-weight:700;color:var(--accent);
+  background:var(--accent-soft);border-radius:4px;padding:3px 7px;line-height:1
+}
+.step-title{font-size:16px;font-weight:650}
+.step-hint{font-size:13px;color:var(--muted);margin-left:auto}
+
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{
+  position:relative;border:1px solid var(--line);border-radius:8px;
+  padding:11px 15px;cursor:pointer;background:#fff;
+  transition:border-color .15s,background .15s;min-width:0
+}
+.opt:hover{border-color:#C9C2B4}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt-name{font-size:14.5px;font-weight:550;display:block}
+.opt-price{font-size:12.5px;color:var(--muted);display:block;margin-top:1px}
+.opt.is-on{border-color:var(--accent);background:var(--accent-soft)}
+.opt.is-on .opt-price{color:var(--accent)}
+
+/* próbki materiału: rysowane CSS-em, nie zdjęcia */
+.sw{display:inline-block;width:15px;height:15px;border-radius:3px;margin-right:9px;
+   vertical-align:-2px;border:1px solid rgba(0,0,0,.12)}
+.sw-dab{background:
+  repeating-linear-gradient(94deg,#C98A4B 0 3px,#BC7C3F 3px 5px,#C98A4B 5px 9px)}
+.sw-jes{background:
+  repeating-linear-gradient(94deg,#E3CFAE 0 3px,#D6BE97 3px 5px,#E3CFAE 5px 9px)}
+.sw-orz{background:
+  repeating-linear-gradient(94deg,#6B4327 0 3px,#5A3620 3px 5px,#6B4327 5px 9px)}
+.sw-lam{background:linear-gradient(160deg,#F2F0EC,#DCD8D1)}
+
+/* suwak */
+.slider-row{display:flex;align-items:center;gap:16px;margin-top:4px}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;flex:1;height:3px;border-radius:2px;
+  background:var(--line);outline:none
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:20px;height:20px;border-radius:50%;
+  background:var(--accent);cursor:grab;border:3px solid #fff;
+  box-shadow:0 0 0 1px var(--line)
+}
+input[type=range]::-moz-range-thumb{
+  width:14px;height:14px;border-radius:50%;background:var(--accent);
+  cursor:grab;border:3px solid #fff;box-shadow:0 0 0 1px var(--line)
+}
+.slider-val{font-variant-numeric:tabular-nums;font-weight:650;min-width:92px;text-align:right}
+.slider-val small{font-weight:400;color:var(--muted)}
+
+.check{display:flex;align-items:flex-start;gap:11px;padding:12px 0;cursor:pointer}
+.check + .check{border-top:1px solid var(--line)}
+.check input{margin:3px 0 0;accent-color:var(--accent);width:16px;height:16px;flex:none}
+.check-body{flex:1}
+.check-name{font-size:14.5px;font-weight:550}
+.check-desc{font-size:13px;color:var(--muted)}
+.check-price{font-size:13.5px;font-weight:600;white-space:nowrap}
+
+/* ---- podsumowanie ---- */
+.summary{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 24px;position:sticky;top:30px
+}
+.summary h2{font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;margin-bottom:16px}
+
+/* podgląd biurka: czysty SVG, skaluje się z wyborem */
+.preview{background:#F4F1EB;border-radius:7px;padding:14px 10px;margin-bottom:18px}
+.preview svg{display:block;width:100%;height:auto}
+
+.lines{font-size:14px}
+.line{display:flex;justify-content:space-between;gap:12px;padding:7px 0;align-items:baseline}
+.line + .line{border-top:1px dashed var(--line)}
+.line-k{color:var(--muted)}
+.line-v{font-weight:550;text-align:right}
+.line-v em{font-style:normal;color:var(--muted);font-weight:400}
+
+.total{margin-top:16px;padding-top:16px;border-top:2px solid var(--ink);
+  display:flex;justify-content:space-between;align-items:baseline}
+.total-k{font-weight:600}
+.total-v{font-size:27px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.total-note{font-size:12.5px;color:var(--muted);margin-top:5px;text-align:right}
+
+.cta{
+  display:block;width:100%;margin-top:18px;padding:13px;border:0;border-radius:7px;
+  background:var(--accent);color:#fff;font:inherit;font-weight:600;cursor:pointer;
+  transition:background .15s
+}
+.cta:hover{background:#9A4418}
+.cta-2{
+  display:block;width:100%;margin-top:9px;padding:11px;border:1px solid var(--line);
+  border-radius:7px;background:#fff;font:inherit;font-size:14px;cursor:pointer;color:var(--ink)
+}
+.sent{font-size:13.5px;color:#1C6B3F;margin-top:11px;display:none}
+.sent.on{display:block}
+
+.foot{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:18px}
+
+@media(max-width:860px){
+  .grid{grid-template-columns:1fr}
+  .summary{position:static}
+  body{padding:26px 16px 60px}
+  h1{font-size:25px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="eyebrow">Demo konfiguratora</div>
+  <h1>Biurko na wymiar</h1>
+  <p class="lede">Wybierz blat, szerokość i dodatki, a cena przeliczy się na bieżąco.
+     Projekt demonstracyjny: pokazuje działanie konfiguratora produktu na stronie.</p>
+
+  <div class="grid">
+
+    <!-- ============ LEWA: wybory ============ -->
+    <div class="panel">
+
+      <div class="step">
+        <div class="step-head">
+          <span class="step-no">01</span>
+          <span class="step-title">Blat</span>
+          <span class="step-hint">grubość 28 mm</span>
+        </div>
+        <div class="opts" id="opt-blat"></div>
+      </div>
+
+      <div class="step">
+        <div class="step-head">
+          <span class="step-no">02</span>
+          <span class="step-title">Szerokość</span>
+          <span class="step-hint">głębokość stała 70 cm</span>
+        </div>
+        <div class="slider-row">
+          <input type="range" id="szer" min="100" max="200" step="10" value="140">
+          <span class="slider-val"><span id="szer-val">140</span> <small>cm</small></span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-head">
+          <span class="step-no">03</span>
+          <span class="step-title">Stelaż</span>
+        </div>
+        <div class="opts" id="opt-stelaz"></div>
+      </div>
+
+      <div class="step">
+        <div class="step-head">
+          <span class="step-no">04</span>
+          <span class="step-title">Dodatki</span>
+          <span class="step-hint">opcjonalne</span>
+        </div>
+        <div id="opt-dodatki"></div>
+      </div>
+
+    </div>
+
+    <!-- ============ PRAWA: podsumowanie ============ -->
+    <aside class="summary">
+      <h2>Twoja konfiguracja</h2>
+
+      <div class="preview">
+        <svg viewBox="14 32 232 118" role="img" aria-label="Podgląd biurka">
+          <!-- cień -->
+          <ellipse id="p-shadow" cx="130" cy="131" rx="86" ry="5" fill="#000" opacity=".07"/>
+          <!-- nogi -->
+          <g id="p-legs" fill="#8A8477"></g>
+          <!-- blat -->
+          <g id="p-top">
+            <rect id="p-top-r" x="44" y="54" width="172" height="11" rx="2"/>
+            <rect id="p-top-edge" x="44" y="63" width="172" height="3" rx="1.5" opacity=".22"/>
+          </g>
+          <!-- szuflada / półka (dodatki) -->
+          <rect id="p-drawer" x="150" y="68" width="48" height="15" rx="2"
+                fill="none" stroke="#9A9385" stroke-width="1.6" opacity="0"/>
+          <!-- wymiar -->
+          <g font-size="8" fill="#9A9385" font-family="monospace">
+            <line id="p-dim-l" x1="44" y1="140" x2="216" y2="140" stroke="#C8C2B4" stroke-width="1"/>
+            <line id="p-dim-a" x1="44" y1="136" x2="44" y2="144" stroke="#C8C2B4" stroke-width="1"/>
+            <line id="p-dim-b" x1="216" y1="136" x2="216" y2="144" stroke="#C8C2B4" stroke-width="1"/>
+            <text id="p-dim-t" x="130" y="137" text-anchor="middle">140 cm</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="lines" id="lines"></div>
+
+      <div class="total">
+        <span class="total-k">Razem</span>
+        <span class="total-v" id="total">0 zł</span>
+      </div>
+      <div class="total-note" id="total-note"></div>
+
+      <button class="cta" id="btn-send">Wyślij zapytanie z tą konfiguracją</button>
+      <button class="cta-2" id="btn-copy">Skopiuj podsumowanie</button>
+      <div class="sent" id="sent">✓ Konfiguracja gotowa do wysłania. W wersji produkcyjnej trafia na maila.</div>
+    </aside>
+
+  </div>
+
+  <p class="foot">
+    Projekt koncepcyjny wykonany jako próbka możliwości, nie jest to realizacja dla klienta.
+    Cała logika to ok. 90 linii czystego JavaScriptu, bez zewnętrznych bibliotek.
+    Ceny i warianty znajdują się w jednym obiekcie <code>CONFIG</code>, więc właściciel strony
+    zmienia je samodzielnie.
+  </p>
+
+</div>
+
+<script>
+/* =================================================================
+   CONFIG: to jedyne miejsce, które edytuje właściciel strony.
+   Dodanie wariantu = dopisanie jednej linijki.
+   ================================================================= */
+const CONFIG = {
+  bazaCena: 890,            // biurko 100 cm, blat laminat, nogi proste
+  cenaZaCm: 6.40,           // dopłata za każdy cm powyżej 100
+
+  blat: [
+    {id:'lam', nazwa:'Laminat',       sw:'sw-lam', doplata:0,   kolor:'#E9E5DE'},
+    {id:'jes', nazwa:'Jesion olejowany', sw:'sw-jes', doplata:340, kolor:'#DEC79F'},
+    {id:'dab', nazwa:'Dąb lity',      sw:'sw-dab', doplata:560, kolor:'#C2854A'},
+    {id:'orz', nazwa:'Orzech',        sw:'sw-orz', doplata:820, kolor:'#6B4327'}
+  ],
+
+  stelaz: [
+    {id:'prosty', nazwa:'Proste nogi',        doplata:0,    typ:'proste'},
+    {id:'rama',   nazwa:'Rama metalowa',      doplata:240,  typ:'rama'},
+    {id:'elektr', nazwa:'Regulacja elektr.',  doplata:1150, typ:'kolumny'}
+  ],
+
+  dodatki: [
+    {id:'kable',  nazwa:'Przepust na kable',    opis:'Frezowany otwór + maskownica', cena:60},
+    {id:'szuf',   nazwa:'Szuflada podblatowa',  opis:'Pełny wysuw, cichy domyk',     cena:280},
+    {id:'polka',  nazwa:'Półka na monitor',     opis:'Lite drewno, 60 × 20 cm',      cena:190},
+    {id:'montaz', nazwa:'Montaż u klienta',     opis:'Trójmiasto i okolice',         cena:150}
+  ],
+
+  dostawa: {prog:2500, kosztPonizej:120}   // darmowa dostawa od 2500 zł
+};
+
+/* ================= stan ================= */
+const stan = {blat:'lam', stelaz:'prosty', szer:140, dodatki:new Set()};
+
+/* Konfiguracja zapisuje się w adresie strony, więc klient może wysłać
+   gotowy link ze swoim wyborem (np. do współmałżonka albo do nas na maila). */
+function wczytajZAdresu(){
+  const h = decodeURIComponent(location.hash.slice(1));
+  if(!h) return;
+  const [blat, szer, stelaz, dod] = h.split('|');
+  if(CONFIG.blat.some(b => b.id === blat))     stan.blat = blat;
+  if(CONFIG.stelaz.some(s => s.id === stelaz)) stan.stelaz = stelaz;
+  const n = parseInt(szer, 10);
+  if(n >= 100 && n <= 200) stan.szer = Math.round(n/10)*10;
+  (dod || '').split(',').filter(Boolean)
+    .filter(id => CONFIG.dodatki.some(d => d.id === id))
+    .forEach(id => stan.dodatki.add(id));
+}
+
+function zapiszDoAdresu(){
+  const h = [stan.blat, stan.szer, stan.stelaz, [...stan.dodatki].join(',')].join('|');
+  history.replaceState(null, '', '#' + h);
+}
+
+/* ================= budowa UI ================= */
+const $ = s => document.querySelector(s);
+wczytajZAdresu();
+const zl = n => n.toLocaleString('pl-PL',{minimumFractionDigits:0,maximumFractionDigits:0}) + ' zł';
+
+function radioGroup(host, lista, klucz, zeSwatch){
+  host.innerHTML = lista.map(o => `
+    <label class="opt${stan[klucz]===o.id?' is-on':''}" data-id="${o.id}">
+      <input type="radio" name="${klucz}" value="${o.id}" ${stan[klucz]===o.id?'checked':''}>
+      <span class="opt-name">${zeSwatch?`<i class="sw ${o.sw}"></i>`:''}${o.nazwa}</span>
+      <span class="opt-price">${o.doplata ? '+ '+zl(o.doplata) : 'w cenie'}</span>
+    </label>`).join('');
+  host.onchange = e => { stan[klucz] = e.target.value; przelicz(); };
+}
+
+radioGroup($('#opt-blat'),   CONFIG.blat,   'blat',   true);
+radioGroup($('#opt-stelaz'), CONFIG.stelaz, 'stelaz', false);
+
+$('#opt-dodatki').innerHTML = CONFIG.dodatki.map(d => `
+  <label class="check">
+    <input type="checkbox" value="${d.id}" ${stan.dodatki.has(d.id)?'checked':''}>
+    <span class="check-body">
+      <span class="check-name">${d.nazwa}</span>
+      <span class="check-desc">${d.opis}</span>
+    </span>
+    <span class="check-price">+ ${zl(d.cena)}</span>
+  </label>`).join('');
+
+$('#opt-dodatki').onchange = e => {
+  e.target.checked ? stan.dodatki.add(e.target.value) : stan.dodatki.delete(e.target.value);
+  przelicz();
+};
+
+$('#szer').value = stan.szer;
+$('#szer').oninput = e => { stan.szer = +e.target.value; przelicz(); };
+
+/* ================= przeliczanie ================= */
+function przelicz(){
+  const blat   = CONFIG.blat.find(b => b.id === stan.blat);
+  const stelaz = CONFIG.stelaz.find(s => s.id === stan.stelaz);
+  const dod    = CONFIG.dodatki.filter(d => stan.dodatki.has(d.id));
+
+  const zaWymiar = Math.round((stan.szer - 100) * CONFIG.cenaZaCm);
+  const suma = CONFIG.bazaCena + zaWymiar + blat.doplata + stelaz.doplata
+             + dod.reduce((s,d) => s + d.cena, 0);
+
+  const dostawa = suma >= CONFIG.dostawa.prog ? 0 : CONFIG.dostawa.kosztPonizej;
+
+  /* --- podświetlenie wybranych --- */
+  document.querySelectorAll('.opt').forEach(el =>
+    el.classList.toggle('is-on', el.querySelector('input').checked));
+  $('#szer-val').textContent = stan.szer;
+
+  /* --- rozpiska --- */
+  const wiersze = [
+    ['Biurko bazowe', zl(CONFIG.bazaCena)],
+    ['Wymiar', `${stan.szer} × 70 cm <em>${zaWymiar ? '+ '+zl(zaWymiar) : ''}</em>`],
+    ['Blat', `${blat.nazwa} <em>${blat.doplata ? '+ '+zl(blat.doplata) : ''}</em>`],
+    ['Stelaż', `${stelaz.nazwa} <em>${stelaz.doplata ? '+ '+zl(stelaz.doplata) : ''}</em>`],
+    ...dod.map(d => [d.nazwa, '+ ' + zl(d.cena)]),
+    ['Dostawa', dostawa ? zl(dostawa) : '<em>gratis</em>']
+  ];
+  $('#lines').innerHTML = wiersze.map(([k,v]) =>
+    `<div class="line"><span class="line-k">${k}</span><span class="line-v">${v}</span></div>`).join('');
+
+  $('#total').textContent = zl(suma + dostawa);
+  $('#total-note').innerHTML = dostawa
+    ? `Do darmowej dostawy brakuje ${zl(CONFIG.dostawa.prog - suma)}`
+    : 'Cena brutto · dostawa gratis';
+
+  rysuj(blat, stelaz);
+  zapiszDoAdresu();
+}
+
+/* ================= podgląd SVG ================= */
+function rysuj(blat, stelaz){
+  const x0 = 130 - (40 + (stan.szer - 100) * 0.70);
+  const w  = (130 - x0) * 2;
+
+  $('#p-top-r').setAttribute('x', x0);
+  $('#p-top-r').setAttribute('width', w);
+  $('#p-top-r').setAttribute('fill', blat.kolor);
+  $('#p-top-edge').setAttribute('x', x0);
+  $('#p-top-edge').setAttribute('width', w);
+  $('#p-top-edge').setAttribute('fill', blat.kolor);
+  $('#p-top-edge').style.filter = 'brightness(.78)';
+
+  $('#p-shadow').setAttribute('rx', w/2 + 4);
+
+  /* nogi zależne od stelaża, zawsze symetrycznie względem blatu */
+  const inset = stelaz.typ === 'kolumny' ? 8 : 10;      // odsunięcie od krawędzi
+  const lw    = stelaz.typ === 'kolumny' ? 11 : stelaz.typ === 'rama' ? 5 : 6;
+  const L = x0 + inset;                                  // lewa noga
+  const R = x0 + w - inset - lw;                         // prawa noga
+  let g = '';
+  if(stelaz.typ === 'proste'){
+    g = `<rect x="${L}" y="65" width="${lw}" height="60" rx="1"/>
+         <rect x="${R}" y="65" width="${lw}" height="60" rx="1"/>`;
+  } else if(stelaz.typ === 'rama'){
+    g = `<rect x="${L}" y="65" width="${lw}" height="60" rx="1"/>
+         <rect x="${R}" y="65" width="${lw}" height="60" rx="1"/>
+         <rect x="${L-10}" y="120" width="26" height="5" rx="1"/>
+         <rect x="${R-11}" y="120" width="26" height="5" rx="1"/>
+         <rect x="${L}" y="92" width="${R - L + lw}" height="4" rx="1" opacity=".5"/>`;
+  } else {
+    g = `<rect x="${L}" y="65" width="${lw}" height="60" rx="1.5"/>
+         <rect x="${R}" y="65" width="${lw}" height="60" rx="1.5"/>
+         <rect x="${L+3}" y="80" width="5" height="34" rx="1" fill="#B8B2A4"/>
+         <rect x="${R+3}" y="80" width="5" height="34" rx="1" fill="#B8B2A4"/>
+         <rect x="${L-9}" y="121" width="29" height="5" rx="2"/>
+         <rect x="${R-9}" y="121" width="29" height="5" rx="2"/>`;
+  }
+  $('#p-legs').innerHTML = g;
+
+  /* szuflada / półka */
+  const maDrawer = stan.dodatki.has('szuf') || stan.dodatki.has('polka');
+  const dr = $('#p-drawer');
+  dr.setAttribute('opacity', maDrawer ? '1' : '0');
+  if(maDrawer){
+    if(stan.dodatki.has('szuf')){
+      dr.setAttribute('x', x0 + w - 70); dr.setAttribute('y', 66);
+      dr.setAttribute('width', 52);      dr.setAttribute('height', 13);
+    } else {
+      dr.setAttribute('x', 130 - 28);    dr.setAttribute('y', 38);
+      dr.setAttribute('width', 56);      dr.setAttribute('height', 15);
+    }
+  }
+
+  /* linia wymiarowa */
+  $('#p-dim-l').setAttribute('x1', x0); $('#p-dim-l').setAttribute('x2', x0 + w);
+  $('#p-dim-a').setAttribute('x1', x0); $('#p-dim-a').setAttribute('x2', x0);
+  $('#p-dim-b').setAttribute('x1', x0+w); $('#p-dim-b').setAttribute('x2', x0+w);
+  $('#p-dim-t').textContent = stan.szer + ' cm';
+}
+
+/* ================= akcje ================= */
+function podsumowanieTekst(){
+  const blat = CONFIG.blat.find(b=>b.id===stan.blat);
+  const st   = CONFIG.stelaz.find(s=>s.id===stan.stelaz);
+  const dod  = CONFIG.dodatki.filter(d=>stan.dodatki.has(d.id)).map(d=>d.nazwa);
+  return [
+    'Biurko na wymiar',
+    'Wymiar: ' + stan.szer + ' × 70 cm',
+    'Blat: ' + blat.nazwa,
+    'Stelaż: ' + st.nazwa,
+    'Dodatki: ' + (dod.length ? dod.join(', ') : 'brak'),
+    'Cena: ' + $('#total').textContent,
+    '',
+    'Link do konfiguracji: ' + location.href
+  ].join('\n');
+}
+
+$('#btn-send').onclick = () => { $('#sent').classList.add('on'); };
+$('#btn-copy').onclick = async () => {
+  try{
+    await navigator.clipboard.writeText(podsumowanieTekst());
+    $('#btn-copy').textContent = '✓ Skopiowano';
+    setTimeout(()=>$('#btn-copy').textContent='Skopiuj podsumowanie',1800);
+  }catch(e){ $('#btn-copy').textContent = 'Zaznacz i skopiuj ręcznie'; }
+};
+
+przelicz();
+</script>
+</body>
+</html>
