@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Okładki wyróżnionych relacji (zestaw)</title>
+<style>
+/* -----------------------------------------------------------------
+   Zestaw okładek na wyróżnione relacje (Instagram Highlights)
+   Każda okładka to czysty wektor 1080×1080, bez zdjęć i bez rastra.
+   Tryb eksportu: dopisz do adresu #export=cennik  → jedna okładka 1080px
+------------------------------------------------------------------ */
+:root{
+  --sand:#E6DACB;
+  --sand-2:#F1E9DF;
+  --mocha:#473A32;
+  --mocha-2:#5C4B40;
+  --paper:#FBF8F4;
+  --ink:#2B241F;
+  --muted:#8A7D72;
+}
+*{box-sizing:border-box;margin:0}
+body{
+  background:var(--paper);color:var(--ink);
+  font:15px/1.6 "Segoe UI",-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  padding:64px 56px 70px;
+  max-width:1200px;width:100%;margin:0 auto;
+}
+
+.head{display:flex;justify-content:space-between;align-items:flex-end;
+      border-bottom:1px solid #E0D7CC;padding-bottom:22px;margin-bottom:44px}
+.kicker{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+        color:#A8733F;font-weight:700;margin-bottom:9px}
+h1{font-size:33px;letter-spacing:-.025em;font-weight:650;line-height:1.15}
+.head p{color:var(--muted);font-size:14.5px;margin-top:7px;max-width:46ch}
+.meta{text-align:right;font-size:12.5px;color:var(--muted);line-height:1.9;white-space:nowrap}
+.meta b{color:var(--ink);font-weight:600}
+
+/* ---- siatka okładek ---- */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px 26px;margin-bottom:52px}
+.cell{text-align:center;min-width:0}
+.cover{
+  width:100%;aspect-ratio:1;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.cover svg{width:100%;height:100%;display:block}
+.cap{margin-top:12px;font-size:12px;letter-spacing:.13em;text-transform:uppercase;
+     color:var(--muted);font-weight:600}
+
+/* ---- podgląd w profilu ---- */
+.showcase{display:flex;gap:46px;align-items:center;
+          background:#F5F0E9;border:1px solid #E6DED4;border-radius:14px;padding:38px 42px}
+.phone{
+  width:288px;flex:none;background:#fff;border-radius:26px;
+  border:1px solid #E2DACF;padding:20px 17px 24px;
+  box-shadow:0 8px 28px rgba(60,45,32,.07)
+}
+.ph-top{display:flex;gap:15px;align-items:center;margin-bottom:15px}
+.ph-av{width:62px;height:62px;border-radius:50%;flex:none;overflow:hidden}
+.ph-av svg{width:100%;height:100%;display:block}
+.ph-stats{display:flex;gap:17px;font-size:11.5px;color:var(--muted);text-align:center}
+.ph-stats b{display:block;color:var(--ink);font-size:14px;font-weight:650}
+.ph-name{font-size:13.5px;font-weight:650;margin-bottom:2px}
+.ph-bio{font-size:11.5px;color:var(--muted);line-height:1.5;margin-bottom:17px}
+.ph-hl{display:flex;gap:13px}
+.ph-hl .h{text-align:center;width:54px}
+.ph-hl .ring{width:54px;height:54px;border-radius:50%;padding:2px;
+             border:1.5px solid #E0D7CC;overflow:hidden}
+.ph-hl .ring svg{width:100%;height:100%;border-radius:50%;display:block}
+.ph-hl span{display:block;font-size:9.5px;color:var(--muted);margin-top:5px;
+            white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.notes h2{font-size:17px;font-weight:650;margin-bottom:14px}
+.notes li{margin-bottom:11px;color:#4A4139;font-size:14px;list-style:none;
+          padding-left:19px;position:relative}
+.notes li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:1.5px;
+                  background:#A8733F}
+.notes li b{font-weight:650;color:var(--ink)}
+
+.swatches{display:flex;gap:9px;margin-top:20px;align-items:center}
+.sw{width:30px;height:30px;border-radius:6px;border:1px solid rgba(0,0,0,.08)}
+.sw-label{font-size:11.5px;color:var(--muted);margin-left:5px}
+
+.foot{margin-top:40px;padding-top:20px;border-top:1px solid #E0D7CC;
+      font-size:12.5px;color:var(--muted)}
+
+/* ---- telefon ---- */
+@media(max-width:820px){
+  body{padding:34px 20px 52px}
+  .head{flex-direction:column;align-items:flex-start;gap:14px}
+  .meta{text-align:left;white-space:normal}
+  h1{font-size:26px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 18px}
+  .cap{font-size:10.5px;letter-spacing:.08em}
+  .notes{min-width:0}
+  .showcase{flex-direction:column;align-items:stretch;gap:30px;padding:26px 22px}
+  .phone{width:100%;max-width:300px;margin:0 auto}
+}
+
+/* ---- tryb eksportu pojedynczej okładki ---- */
+body.export{padding:0;width:1080px;max-width:1080px;height:1080px;background:transparent}
+body.export > *{display:none}
+body.export .one{display:block;width:1080px;height:1080px}
+.one{display:none}
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div>
+    <div class="kicker">Projekt koncepcyjny</div>
+    <h1>Okładki wyróżnionych relacji</h1>
+    <p>Zestaw ośmiu ikon w jednym stylu dla studia kosmetycznego.
+       Rysunek wektorowy, ostry na każdym ekranie.</p>
+  </div>
+  <div class="meta">
+    Format <b>1080 × 1080 px</b><br>
+    Pliki <b>PNG + SVG</b><br>
+    Marka <b>MILA studio</b> <i>(fikcyjna)</i>
+  </div>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="showcase">
+  <div class="phone">
+    <div class="ph-top">
+      <div class="ph-av" id="avatar"></div>
+      <div class="ph-stats">
+        <div><b>2&nbsp;847</b>posty</div>
+        <div><b>18,4&nbsp;tys.</b>obserw.</div>
+        <div><b>312</b>obserwuje</div>
+      </div>
+    </div>
+    <div class="ph-name">mila.studio</div>
+    <div class="ph-bio">Studio kosmetyczne · Gdańsk Wrzeszcz<br>Rezerwacje przez Booksy ↓</div>
+    <div class="ph-hl" id="phone-hl"></div>
+  </div>
+
+  <div class="notes">
+    <h2>Dlaczego tak, a nie inaczej</h2>
+    <ul>
+      <li><b>Jedna grubość linii</b> w całym zestawie, dzięki czemu na profilu okładki
+          czytają się jak komplet, a nie zbiór przypadkowych ikon.</li>
+      <li><b>Naprzemienne tło</b> (jasne / ciemne) buduje rytm w pasku wyróżnionych
+          i ułatwia szybkie trafienie w właściwą relację.</li>
+      <li><b>Ikony bez tekstu w środku.</b> Instagram i tak wyświetla podpis pod kółkiem,
+          a napis w środku robi się nieczytelny przy 54 px.</li>
+      <li><b>Duży margines wewnętrzny.</b> Kadr Instagrama przycina brzegi koła,
+          więc rysunek nie może dotykać krawędzi.</li>
+      <li><b>Wektor zamiast zdjęć.</b> Zestaw można przekolorować pod nową identyfikację
+          w kilka minut, bez przerysowywania.</li>
+    </ul>
+    <div class="swatches">
+      <div class="sw" style="background:#E6DACB"></div>
+      <div class="sw" style="background:#473A32"></div>
+      <div class="sw" style="background:#F1E9DF"></div>
+      <div class="sw" style="background:#A8733F"></div>
+      <span class="sw-label">Paleta: piasek / mokka / len / karmel</span>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  Projekt koncepcyjny wykonany jako próbka. Marka „MILA studio” jest fikcyjna,
+  a zestaw nie był realizacją komercyjną. Wszystkie ikony narysowane od zera.
+</div>
+
+<div class="one" id="one"></div>
+
+<script>
+/* ===== ikony: własne ścieżki, wspólna siatka 48×48, jednolita linia ===== */
+const IKONY = {
+  cennik:`<path d="M41 7H27.6a3 3 0 0 0-2.1.9L7.9 25.5a3 3 0 0 0 0 4.2l12.4 12.4a3 3 0 0 0 4.2 0
+            l17.6-17.6a3 3 0 0 0 .9-2.1V7z"/><circle cx="33.6" cy="14.4" r="2.6"/>`,
+  zabiegi:`<rect x="19.5" y="4.5" width="9" height="9.5" rx="1.6"/>
+           <path d="M22.4 14v3.4"/><path d="M25.6 14v3.4"/>
+           <rect x="15.5" y="17.4" width="17" height="26" rx="4.5"/>
+           <path d="M15.5 27.5h17"/>`,
+  metamorfozy:`<circle cx="24" cy="24" r="15.5"/>
+           <path d="M24 8.5a15.5 15.5 0 0 1 0 31z" fill="currentColor" stroke="none"/>`,
+  opinie:`<path d="M24 6.5l5.4 10.9 12.1 1.8-8.8 8.5 2.1 12-10.8-5.7-10.8 5.7 2.1-12-8.8-8.5
+           12.1-1.8z"/>`,
+  grafik:`<rect x="6.5" y="10.5" width="35" height="31" rx="3.5"/>
+          <path d="M6.5 19.5h35"/><path d="M16 5.5v9"/><path d="M32 5.5v9"/>
+          <circle cx="16.5" cy="28.5" r="2.1" fill="currentColor" stroke="none"/>
+          <circle cx="24" cy="28.5" r="2.1" fill="currentColor" stroke="none"/>`,
+  promocje:`<path d="M13.5 34.5l21-21"/><circle cx="16.8" cy="16.8" r="4.3"/>
+            <circle cx="31.2" cy="31.2" r="4.3"/>`,
+  dojazd:`<path d="M24 42.5s12.5-13.8 12.5-21.9a12.5 12.5 0 1 0-25 0C11.5 28.7 24 42.5 24 42.5z"/>
+          <circle cx="24" cy="20.3" r="4.6"/>`,
+  kontakt:`<rect x="5.5" y="12.5" width="37" height="25" rx="3.5"/>
+           <path d="M6.5 15.2L24 27.4l17.5-12.2"/>`
+};
+
+const ZESTAW = [
+  ['cennik','Cennik',true],
+  ['zabiegi','Zabiegi',false],
+  ['metamorfozy','Metamorfozy',true],
+  ['opinie','Opinie',false],
+  ['grafik','Grafik',false],
+  ['promocje','Promocje',true],
+  ['dojazd','Dojazd',false],
+  ['kontakt','Kontakt',true]
+];
+
+/* ciemna okładka = odwrócone kolory; daje rytm w pasku na profilu */
+function svgOkladki(id, ciemna, rozmiar){
+  const tlo  = ciemna ? '#473A32' : '#E6DACB';
+  const linia= ciemna ? '#EFE6DA' : '#473A32';
+  return `<svg viewBox="0 0 48 48" ${rozmiar?`width="${rozmiar}" height="${rozmiar}"`:''}
+            xmlns="http://www.w3.org/2000/svg">
+      <rect width="48" height="48" fill="${tlo}"/>
+      <g transform="translate(24 24) scale(.62) translate(-24 -24)"
+         fill="none" stroke="${linia}" stroke-width="2.3"
+         stroke-linecap="round" stroke-linejoin="round" color="${linia}">
+        ${IKONY[id]}
+      </g>
+    </svg>`;
+}
+
+/* ---- siatka ---- */
+document.getElementById('grid').innerHTML = ZESTAW.map(([id,nazwa,ciemna]) =>
+  `<div class="cell">
+     <div class="cover">${svgOkladki(id,ciemna)}</div>
+     <div class="cap">${nazwa}</div>
+   </div>`).join('');
+
+/* ---- pasek na telefonie: pierwsze 4 ---- */
+document.getElementById('phone-hl').innerHTML = ZESTAW.slice(0,4).map(([id,nazwa,ciemna]) =>
+  `<div class="h"><div class="ring">${svgOkladki(id,ciemna)}</div><span>${nazwa}</span></div>`
+).join('');
+
+/* ---- awatar: monogram studia ---- */
+document.getElementById('avatar').innerHTML = `
+  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+    <rect width="48" height="48" fill="#473A32"/>
+    <text x="24" y="24" text-anchor="middle" dominant-baseline="central"
+          font-family="Georgia,serif" font-size="19" fill="#E6DACB"
+          letter-spacing="1.5">M</text>
+  </svg>`;
+
+/* ---- tryb eksportu: #export=cennik ---- */
+const m = location.hash.match(/export=(\w+)/);
+if(m && IKONY[m[1]]){
+  const poz = ZESTAW.find(z => z[0] === m[1]);
+  document.body.classList.add('export');
+  document.getElementById('one').innerHTML = svgOkladki(m[1], poz[2], 1080);
+}
+</script>
+</body>
+</html>
