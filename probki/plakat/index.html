@@ -7,67 +7,72 @@
 <meta name="description" content="Propozycja oprawy graficznej personalizowanego plakatu urodzinowego, kierunek minimalistyczny.">
 <style>
 *{box-sizing:border-box;margin:0}
-body{background:#E7E2D8;font:15px/1.6 "Segoe UI",-apple-system,Roboto,Helvetica,Arial,sans-serif;
+body{background:#E5E0D6;font:15px/1.6 "Segoe UI",-apple-system,Roboto,Helvetica,Arial,sans-serif;
   color:#1B1B1F;padding:28px 16px 48px}
-.opis{max-width:640px;margin:0 auto 26px}
+.opis{max-width:660px;margin:0 auto 26px}
 .opis .kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#A8733F;
   font-weight:700;margin-bottom:8px}
 .opis h1{font-size:25px;letter-spacing:-.02em;line-height:1.2;font-weight:700}
 .opis p{color:#5C564D;margin-top:9px;font-size:14.5px}
 .opis ul{margin:12px 0 0;padding-left:18px;color:#5C564D;font-size:14.5px}
 .opis li{margin-bottom:5px}
+.opis b{color:#1B1B1F;font-weight:650}
 
 .scena{display:flex;justify-content:center}
-.ramka{box-shadow:0 10px 34px rgba(60,50,35,.2);transform-origin:top center}
+.ramka{box-shadow:0 12px 38px rgba(55,45,30,.22);transform-origin:top center}
 
-/* ---------- sam plakat: A4 pion, 150 dpi ---------- */
-.plakat{
-  width:1240px;height:1754px;background:#F4F1EB;color:#1A1714;position:relative;overflow:hidden;
-  font-family:"Segoe UI",-apple-system,Helvetica,Arial,sans-serif;
-}
-.rama{position:absolute;inset:52px;border:1px solid #DCD5C8}
-.tresc{position:absolute;inset:52px;padding:112px 96px 64px;
-  display:flex;flex-direction:column;align-items:center}
-.etykieta{font-size:18px;letter-spacing:.46em;text-transform:uppercase;
-  color:#9A8E7C;font-weight:600;margin-left:.46em}
-.kreska{width:50px;height:1px;background:#CCC2B1;margin-top:24px}
-.srodek{flex:1;width:100%;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;position:relative;margin-top:-12px}
-.halo{position:absolute;left:50%;top:0;width:470px;height:470px;margin-left:-235px;
-  border:1px solid #E5DECF;border-radius:50%}
-.cyfra{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:400px;line-height:.80;font-weight:700;letter-spacing:-.05em;position:relative;
+/* ================= plakat: A4 pion, 150 dpi ================= */
+.plakat{width:1240px;height:1754px;background:#F2EFE8;color:#171412;
+  position:relative;overflow:hidden;
+  font-family:"Segoe UI",-apple-system,Helvetica,Arial,sans-serif}
+
+.pion{position:absolute;left:74px;top:50%;transform:translateY(-50%) rotate(180deg);
+  writing-mode:vertical-rl;font-size:17px;letter-spacing:.52em;text-transform:uppercase;
+  color:#A99C88;font-weight:600}
+.pion-kreska{position:absolute;left:81px;height:120px;width:1px;background:#D5CCBA}
+.pk-gora{top:112px}.pk-dol{bottom:112px}
+
+.seria{position:absolute;right:84px;top:112px;text-align:right;font-size:15px;
+  letter-spacing:.3em;text-transform:uppercase;color:#A99C88;font-weight:600;line-height:2}
+.seria b{display:block;color:#171412;font-weight:600}
+
+.scenaP{position:absolute;left:150px;right:84px;top:0;bottom:0;
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+
+.cyfra{font-family:Georgia,"Times New Roman",serif;
+  font-size:700px;line-height:.74;font-weight:700;letter-spacing:-.06em;
+  margin-left:-26px;position:relative;
   background-image:
-    linear-gradient(150deg,#7F9189,#63756C),
-    linear-gradient(28deg,#C6A287,#A67E62),
-    linear-gradient(195deg,#7A8795,#5A6673),
-    linear-gradient(115deg,#B6A086,#8B775F),
-    linear-gradient(60deg,#9FA8A0,#7C8780),
-    linear-gradient(230deg,#C2AE97,#9B8871);
+    radial-gradient(120% 90% at 30% 20%, #A8BBAE 0%, #6E8577 55%, #4E6155 100%),
+    radial-gradient(120% 90% at 70% 25%, #E2BC99 0%, #C08F68 55%, #9A6B47 100%),
+    radial-gradient(110% 100% at 40% 35%, #9FB2C4 0%, #71889E 55%, #4F6376 100%),
+    radial-gradient(120% 95% at 55% 30%, #D8C3A6 0%, #B29876 55%, #8A7152 100%),
+    radial-gradient(130% 90% at 35% 25%, #C9CEC6 0%, #959E95 60%, #6F786F 100%),
+    radial-gradient(120% 95% at 60% 30%, #E6D2B8 0%, #BFA584 55%, #93795A 100%);
   background-size:34% 51%,33% 51%,33% 51%,34% 49%,33% 49%,33% 49%;
   background-position:left top,center top,right top,left bottom,center bottom,right bottom;
   background-repeat:no-repeat;
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.cyfra::after{
-  content:"18";position:absolute;left:0;top:0;
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.cyfra::after{content:"18";position:absolute;left:0;top:0;
   background:
-    linear-gradient(90deg,transparent calc(33.5% - 2px),#F4F1EB calc(33.5% - 2px),#F4F1EB calc(33.5% + 2px),transparent calc(33.5% + 2px)),
-    linear-gradient(90deg,transparent calc(66.5% - 2px),#F4F1EB calc(66.5% - 2px),#F4F1EB calc(66.5% + 2px),transparent calc(66.5% + 2px)),
-    linear-gradient(180deg,transparent calc(51% - 2px),#F4F1EB calc(51% - 2px),#F4F1EB calc(51% + 2px),transparent calc(51% + 2px));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.imie{margin-top:72px;font-size:100px;font-weight:300;letter-spacing:.3em;
-  text-transform:uppercase;margin-left:.3em;line-height:1}
-.haslo{margin-top:30px;font-family:Georgia,"Times New Roman",serif;
-  font-style:italic;font-size:34px;color:#5E564B}
-.dol{display:flex;align-items:center;gap:22px;font-size:18px;letter-spacing:.3em;
-  text-transform:uppercase;color:#9A8E7C}
-.dol i{display:block;width:42px;height:1px;background:#CCC2B1}
+    linear-gradient(90deg,transparent calc(33.5% - 2.5px),#F2EFE8 calc(33.5% - 2.5px),#F2EFE8 calc(33.5% + 2.5px),transparent calc(33.5% + 2.5px)),
+    linear-gradient(90deg,transparent calc(66.5% - 2.5px),#F2EFE8 calc(66.5% - 2.5px),#F2EFE8 calc(66.5% + 2.5px),transparent calc(66.5% + 2.5px)),
+    linear-gradient(180deg,transparent calc(51% - 2.5px),#F2EFE8 calc(51% - 2.5px),#F2EFE8 calc(51% + 2.5px),transparent calc(51% + 2.5px));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
 
-.nota{max-width:640px;margin:26px auto 0;font-size:13.5px;color:#6A6258;
-  background:#F1ECE2;border:1px solid #D9D2C5;border-radius:10px;padding:14px 18px}
+.imie{margin-top:-128px;position:relative;z-index:2;
+  display:inline-block;background:#F2EFE8;padding:22px 34px 16px;margin-left:-34px;
+  font-size:128px;font-weight:200;letter-spacing:.26em;
+  text-transform:uppercase;line-height:1;color:#171412}
+.haslo{margin-top:40px;font-family:Georgia,"Times New Roman",serif;font-style:italic;
+  font-size:38px;color:#5A5248}
+
+.stopka{position:absolute;left:150px;right:84px;bottom:112px;display:flex;align-items:center;
+  gap:22px;font-size:16px;letter-spacing:.3em;text-transform:uppercase;color:#A99C88;font-weight:600}
+.stopka .linia{flex:1;height:1px;background:#D5CCBA}
+
+.nota{max-width:660px;margin:26px auto 0;font-size:13.5px;color:#6A6258;
+  background:#EFEAE0;border:1px solid #D6CFC2;border-radius:10px;padding:14px 18px}
 </style>
 </head>
 <body>
@@ -78,28 +83,30 @@ body{background:#E7E2D8;font:15px/1.6 "Segoe UI",-apple-system,Roboto,Helvetica,
   <p>Kierunek minimalistyczny, jeden z trzech opisanych w ogłoszeniu. Format A4 pionowo,
      przygotowany pod druk.</p>
   <ul>
-    <li>Dużo jasnej przestrzeni, bez balonów i konfetti.</li>
-    <li>Układ działa tak samo dla kobiety i mężczyzny.</li>
-    <li>Stonowana paleta, żeby nie gryzła się ze zdjęciami o różnej kolorystyce.</li>
-    <li>Wymienne są: cyfra, zdjęcia, imię, hasło i data, więc ten sam układ obsłuży 30, 40, 50 i 60.</li>
+    <li><b>Cyfra jako bohater kadru</b>, bo to ona niesie zdjęcia i to ona sprzedaje produkt.</li>
+    <li><b>Imię przecina cyfrę</b> jasnym pasem. To jeden zabieg zamiast wielu ozdobników,
+        a nadaje całości charakter.</li>
+    <li>Zero balonów i konfetti. Dekoracją jest sama typografia i światło.</li>
+    <li>Paleta stonowana, żeby nie gryzła się ze zdjęciami o różnej kolorystyce.</li>
+    <li>Układ czyta się tak samo dla kobiety i mężczyzny.</li>
+    <li>Wymienne są: cyfra, zdjęcia, imię, hasło, data i miejsce, więc ten sam układ
+        obsłuży 30, 40, 50 i 60 bez przebudowy.</li>
   </ul>
 </div>
 
 <div class="scena">
   <div class="ramka" id="ramka">
     <div class="plakat">
-      <div class="rama"></div>
-      <div class="tresc">
-        <div class="etykieta">Osiemnaście lat</div>
-        <div class="kreska"></div>
-        <div class="srodek">
-          <div class="halo" id="halo"></div>
-          <div class="cyfra" id="cyfra">18</div>
-          <div class="imie">Jakub</div>
-          <div class="haslo">Grzeczny tylko do zdjęcia.</div>
-        </div>
-        <div class="dol"><i></i>12 lipca 2026<i></i></div>
+      <div class="pion-kreska pk-gora"></div>
+      <div class="pion">Osiemnaste urodziny</div>
+      <div class="pion-kreska pk-dol"></div>
+      <div class="seria">Pamiątka<b>2026</b></div>
+      <div class="scenaP">
+        <div class="cyfra">18</div>
+        <div class="imie">Jakub</div>
+        <div class="haslo">Grzeczny tylko do zdjęcia.</div>
       </div>
+      <div class="stopka"><span>12 lipca</span><span class="linia"></span><span>Kraków</span></div>
     </div>
   </div>
 </div>
@@ -107,16 +114,10 @@ body{background:#E7E2D8;font:15px/1.6 "Segoe UI",-apple-system,Roboto,Helvetica,
 <div class="nota">
   Kolorowe pola wewnątrz cyfry pokazują miejsca na zdjęcia. W gotowym pliku wchodzi tam
   cyfra-kolaż ze zdjęciami przekazana przez zleceniodawcę. Projekt poglądowy, wykonany
-  na podstawie opisu zlecenia.
+  na podstawie samego opisu zlecenia.
 </div>
 
 <script>
-/* halo dokładnie na środku cyfry */
-const c=document.getElementById('cyfra'), s=c.parentElement, h=document.getElementById('halo');
-const rc=c.getBoundingClientRect(), rs=s.getBoundingClientRect();
-h.style.top=(rc.top-rs.top+rc.height/2-235)+'px';
-
-/* plakat skaluje się do szerokości ekranu */
 const r=document.getElementById('ramka');
 function skaluj(){
   const k=Math.min(1,(document.documentElement.clientWidth-32)/1240);
