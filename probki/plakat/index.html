@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plakat urodzinowy A4 — propozycja</title>
+<meta name="description" content="Propozycja oprawy graficznej personalizowanego plakatu urodzinowego, kierunek minimalistyczny.">
+<style>
+*{box-sizing:border-box;margin:0}
+body{background:#E7E2D8;font:15px/1.6 "Segoe UI",-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  color:#1B1B1F;padding:28px 16px 48px}
+.opis{max-width:640px;margin:0 auto 26px}
+.opis .kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#A8733F;
+  font-weight:700;margin-bottom:8px}
+.opis h1{font-size:25px;letter-spacing:-.02em;line-height:1.2;font-weight:700}
+.opis p{color:#5C564D;margin-top:9px;font-size:14.5px}
+.opis ul{margin:12px 0 0;padding-left:18px;color:#5C564D;font-size:14.5px}
+.opis li{margin-bottom:5px}
+
+.scena{display:flex;justify-content:center}
+.ramka{box-shadow:0 10px 34px rgba(60,50,35,.2);transform-origin:top center}
+
+/* ---------- sam plakat: A4 pion, 150 dpi ---------- */
+.plakat{
+  width:1240px;height:1754px;background:#F4F1EB;color:#1A1714;position:relative;overflow:hidden;
+  font-family:"Segoe UI",-apple-system,Helvetica,Arial,sans-serif;
+}
+.rama{position:absolute;inset:52px;border:1px solid #DCD5C8}
+.tresc{position:absolute;inset:52px;padding:112px 96px 64px;
+  display:flex;flex-direction:column;align-items:center}
+.etykieta{font-size:18px;letter-spacing:.46em;text-transform:uppercase;
+  color:#9A8E7C;font-weight:600;margin-left:.46em}
+.kreska{width:50px;height:1px;background:#CCC2B1;margin-top:24px}
+.srodek{flex:1;width:100%;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;position:relative;margin-top:-12px}
+.halo{position:absolute;left:50%;top:0;width:470px;height:470px;margin-left:-235px;
+  border:1px solid #E5DECF;border-radius:50%}
+.cyfra{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:400px;line-height:.80;font-weight:700;letter-spacing:-.05em;position:relative;
+  background-image:
+    linear-gradient(150deg,#7F9189,#63756C),
+    linear-gradient(28deg,#C6A287,#A67E62),
+    linear-gradient(195deg,#7A8795,#5A6673),
+    linear-gradient(115deg,#B6A086,#8B775F),
+    linear-gradient(60deg,#9FA8A0,#7C8780),
+    linear-gradient(230deg,#C2AE97,#9B8871);
+  background-size:34% 51%,33% 51%,33% 51%,34% 49%,33% 49%,33% 49%;
+  background-position:left top,center top,right top,left bottom,center bottom,right bottom;
+  background-repeat:no-repeat;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.cyfra::after{
+  content:"18";position:absolute;left:0;top:0;
+  background:
+    linear-gradient(90deg,transparent calc(33.5% - 2px),#F4F1EB calc(33.5% - 2px),#F4F1EB calc(33.5% + 2px),transparent calc(33.5% + 2px)),
+    linear-gradient(90deg,transparent calc(66.5% - 2px),#F4F1EB calc(66.5% - 2px),#F4F1EB calc(66.5% + 2px),transparent calc(66.5% + 2px)),
+    linear-gradient(180deg,transparent calc(51% - 2px),#F4F1EB calc(51% - 2px),#F4F1EB calc(51% + 2px),transparent calc(51% + 2px));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.imie{margin-top:72px;font-size:100px;font-weight:300;letter-spacing:.3em;
+  text-transform:uppercase;margin-left:.3em;line-height:1}
+.haslo{margin-top:30px;font-family:Georgia,"Times New Roman",serif;
+  font-style:italic;font-size:34px;color:#5E564B}
+.dol{display:flex;align-items:center;gap:22px;font-size:18px;letter-spacing:.3em;
+  text-transform:uppercase;color:#9A8E7C}
+.dol i{display:block;width:42px;height:1px;background:#CCC2B1}
+
+.nota{max-width:640px;margin:26px auto 0;font-size:13.5px;color:#6A6258;
+  background:#F1ECE2;border:1px solid #D9D2C5;border-radius:10px;padding:14px 18px}
+</style>
+</head>
+<body>
+
+<div class="opis">
+  <div class="kicker">Propozycja do zlecenia</div>
+  <h1>Oprawa personalizowanego plakatu urodzinowego</h1>
+  <p>Kierunek minimalistyczny, jeden z trzech opisanych w ogłoszeniu. Format A4 pionowo,
+     przygotowany pod druk.</p>
+  <ul>
+    <li>Dużo jasnej przestrzeni, bez balonów i konfetti.</li>
+    <li>Układ działa tak samo dla kobiety i mężczyzny.</li>
+    <li>Stonowana paleta, żeby nie gryzła się ze zdjęciami o różnej kolorystyce.</li>
+    <li>Wymienne są: cyfra, zdjęcia, imię, hasło i data, więc ten sam układ obsłuży 30, 40, 50 i 60.</li>
+  </ul>
+</div>
+
+<div class="scena">
+  <div class="ramka" id="ramka">
+    <div class="plakat">
+      <div class="rama"></div>
+      <div class="tresc">
+        <div class="etykieta">Osiemnaście lat</div>
+        <div class="kreska"></div>
+        <div class="srodek">
+          <div class="halo" id="halo"></div>
+          <div class="cyfra" id="cyfra">18</div>
+          <div class="imie">Jakub</div>
+          <div class="haslo">Grzeczny tylko do zdjęcia.</div>
+        </div>
+        <div class="dol"><i></i>12 lipca 2026<i></i></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nota">
+  Kolorowe pola wewnątrz cyfry pokazują miejsca na zdjęcia. W gotowym pliku wchodzi tam
+  cyfra-kolaż ze zdjęciami przekazana przez zleceniodawcę. Projekt poglądowy, wykonany
+  na podstawie opisu zlecenia.
+</div>
+
+<script>
+/* halo dokładnie na środku cyfry */
+const c=document.getElementById('cyfra'), s=c.parentElement, h=document.getElementById('halo');
+const rc=c.getBoundingClientRect(), rs=s.getBoundingClientRect();
+h.style.top=(rc.top-rs.top+rc.height/2-235)+'px';
+
+/* plakat skaluje się do szerokości ekranu */
+const r=document.getElementById('ramka');
+function skaluj(){
+  const k=Math.min(1,(document.documentElement.clientWidth-32)/1240);
+  r.style.transform='scale('+k+')';
+  r.style.height=(1754*k)+'px';
+}
+skaluj(); addEventListener('resize',skaluj);
+</script>
+</body>
+</html>
